@@ -4,6 +4,9 @@ props: {
     premium: {
         type: Boolean,
         required: true
+    },
+    cart: {
+        required: true
     }
 },
 
@@ -40,7 +43,7 @@ template:
     :class="{ disabledButton: !inStock }"
     :disabled="!inStock">Add to Cart</button>
 
-    <button class="button" :class="{ disabledButton: !inStock }" v-if="cart > 0" @click="removeFromCart">Remove From Cart</button>
+    <button class="button" :class="{ disabledButton: !inStock }" v-if="cart.length > 0" @click="removeFromCart">Remove From Cart</button>
 
 
 
@@ -69,12 +72,10 @@ data: function(){
 
     methods:{
         addToCart(){
-            this.cart += 1,
-            this.inventory -= 1
+            this.$emit("add-to-cart", this.variants[this.selectedVariant].id);
         },
         removeFromCart(){
-            this.cart -= 1,
-            this.inventory += 1
+            this.$emit("remove-from-cart");
         },
         updateVariant(index) {
             this.selectedVariant = index;
