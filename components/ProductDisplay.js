@@ -46,7 +46,8 @@ template:
     <button class="button" :class="{ disabledButton: !inStock }" v-if="cart.length > 0" @click="removeFromCart">Remove From Cart</button>
 
 
-
+    <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+    <review-form @review-submitted="addReview"></review-form>
   </div>
 </div>
 </div>`,
@@ -63,12 +64,14 @@ data: function(){
         ],
         sizes: ['xiao', 'petite', 'average joe', 'bolder buddy', 'husky human', 'extra large twice in charge'],
         brand: "Vue Mastery",
-        selectedVariant: 0
+        selectedVariant: 0,
 
         // testMethod: function(){
         //     alert('Yo!')
-        }
-    },
+        reviews: []
+    }
+        
+},
 
     methods:{
         addToCart(){
@@ -79,6 +82,10 @@ data: function(){
         },
         updateVariant(index) {
             this.selectedVariant = index;
+        },
+        addReview(review){
+            this.reviews.push(review);
+
         }
     },
 
