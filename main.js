@@ -12,7 +12,8 @@ const app = Vue.createApp({
             ],
             sizes: ['xiao', 'petite', 'average joe', 'bolder buddy', 'husky human', 'extra large twice in charge'],
             cart: 0,
-            brand: "Vue Mastery"
+            brand: "Vue Mastery",
+            selectedVariant: 0
 
 
 
