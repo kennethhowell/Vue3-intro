@@ -22,6 +22,12 @@ template:
         <option>1</option>
     </select>
 
+    <label for="recommend">Would you recommend this product?</label>
+    <select id="reccomend" v-model="recommend">
+        <option>Yeah</option>
+        <option>Nah</option>
+    </select>
+
     <input class="button" type="submit" value="Submit">
 
 
@@ -31,27 +37,33 @@ data: function(){
     return {
         name: "",
         review: "",
-        rating: null
+        rating: null,
+        reccomend: ""
     }
 
     },
     methods: {
         onSubmit: function () {
             
-            if (this.name === "" || this.review === "" || this.rating === null){
+            if (this.name === "" || this.review === "" || this.rating === null || this.recommend === null){
                 alert("Review is incomplete! Please fill in all details");
                 return;
 
             }
 
+            console.log(this.recommend)
+            console.log(typeof this.recommend)
 
             let productReview = {
                name: this.name,
                review: this.review,
-               rating: this.rating 
+               rating: this.rating,
+               reccomend: this.recommend 
             };
+
             this.$emit("review-submitted", productReview);
 
+            this.recommend = null;
             this.name = "";
             this.review = "";
             this.rating = null;
