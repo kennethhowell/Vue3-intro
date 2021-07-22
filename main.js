@@ -3,17 +3,16 @@ const app = Vue.createApp({
         return {
             product: "Socks",
             description:  'Warm with breathable design to keep you from having those awful sweaty feets',
-            image: './assets/images/socks_blue.jpg',
             url: "https://www.google.com",
-            inventory: 1,
             onSale: true,
             details: ['Free range', 'hormone free', 'low sodium'],
             variants: [
-                {id: 0330, color: 'green', image: './assets/images/socks_green.jpg'},
-                {id: 0810, color: 'blue', image: './assets/images/socks_blue.jpg'}
+                {id: 0330, color: 'green', image: './assets/images/socks_green.jpg', quantity: 40},
+                {id: 0810, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0}
             ],
             sizes: ['xiao', 'petite', 'average joe', 'bolder buddy', 'husky human', 'extra large twice in charge'],
-            cart: 0
+            cart: 0,
+            brand: "Vue Mastery"
 
 
 
@@ -31,8 +30,20 @@ const app = Vue.createApp({
                 this.cart -= 1,
                 this.inventory += 1
             },
-            updateImage(variantImage) {
-                this.image = variantImage;
+            updateVariant(index) {
+                this.selectedVariant = index;
+            }
+        },
+
+        computed: {
+            title: function(){
+                return this.brand + " " + this.product + "!";
+            },
+            image: function(){
+                return this.variants[this.selectedVariant].image;
+            },
+            inStock: function(){
+                return this.variants[this.selectedVariant].quantity;
             }
         }
     }
