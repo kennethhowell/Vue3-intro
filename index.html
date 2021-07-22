@@ -37,11 +37,11 @@
             <p v-if="inStock">In Stock</p>
             <p v-else>Out of Stock</p>
 
-            <p v-if="onSale">Clarence's Socks</p>
+            <h6 v-if="onSale">Clarence's Socks [Clearance Priced]</p>
 
             <button class="button" @click="addToCart" 
             :class="{ disabledButton: !inStock }"
-            :disabled="inventory <= 0">Add to Cart</button>
+            :disabled="!inStock">Add to Cart</button>
 
             <button class="button" :class="{ disabledButton: !inStock }" v-if="cart > 0" @click="removeFromCart">Remove From Cart</button>
         

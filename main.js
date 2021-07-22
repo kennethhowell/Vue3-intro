@@ -4,11 +4,10 @@ const app = Vue.createApp({
             product: "Socks",
             description:  'Warm with breathable design to keep you from having those awful sweaty feets',
             url: "https://www.google.com",
-            onSale: true,
             details: ['Free range', 'hormone free', 'low sodium'],
             variants: [
-                {id: 0330, color: 'green', image: './assets/images/socks_green.jpg', quantity: 40},
-                {id: 0810, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0}
+                {id: 0330, color: 'green', image: './assets/images/socks_green.jpg', quantity: 40, onSale: true},
+                {id: 0810, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0, onSale: false}
             ],
             sizes: ['xiao', 'petite', 'average joe', 'bolder buddy', 'husky human', 'extra large twice in charge'],
             cart: 0,
@@ -44,7 +43,11 @@ const app = Vue.createApp({
                 return this.variants[this.selectedVariant].image;
             },
             inStock: function(){
+                console.log(this.variants[this.selectedVariant].quantity);
                 return this.variants[this.selectedVariant].quantity;
+            },
+            onSale: function(){
+                return this.variants[this.selectedVariant].onSale;
             }
         }
     }
